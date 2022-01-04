@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App'
+import './style/style.css'
 
-ReactDOM.render(<h1>Carregando...</h1>
-  ,
+ReactDOM.render(
+  <App />,
   document.getElementById('root')
 );
