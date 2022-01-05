@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 body {
@@ -16,6 +17,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+.login-form :placeholder-shown {
+  -webkit-text-fill-color: #D4D4D4;
 }
 .login-form input {
   width: 303px;
@@ -37,6 +41,30 @@ body {
   font-weight: 400;
   font-size: 20.976px;
   line-height: 26px;
+}
+
+.top-bar {
+  background-color: #126BA5;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.top-bar-img {
+  width: 50px;
+  height: 50px;
+  background-image: url("../assets/top-bar-img.svg");
+}
+
+.menu {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #52B6FF;
+  background-color: #FFFFFF;
 }
 
 /*# sourceMappingURL=style.css.map */

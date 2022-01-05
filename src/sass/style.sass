@@ -8,6 +8,7 @@ $background-color: #E5E5E5
     margin: 0
     padding: 0
     box-sizing: border-box
+    text-decoration: none
 
 body
     width: 100%
@@ -23,13 +24,14 @@ body
         flex-direction: column
         gap: 6px
 
+        :placeholder-shown
+            -webkit-text-fill-color: #D4D4D4
         input
             width: 303px
             height: 45px
             background: $white
             border: 1px solid #D5D5D5
             border-radius: 5px
-
             font-size: 19.976px
             line-height: 25px
             text-indent: 10px
@@ -45,3 +47,26 @@ body
         font-weight: 400
         font-size: 20.976px
         line-height: 26px
+
+.top-bar
+    background-color: $secondary-color
+    display: flex
+    justify-content: space-around
+    align-items: center
+    &-img
+        width: 50px
+        height: 50px
+        background-image: url('../assets/top-bar-img.svg')
+
+
+.menu
+    position: fixed
+    bottom: 0
+    width: 100%
+    height: 70px
+
+    display: flex
+    justify-content: space-around
+    align-items: center
+    color: $primary-color
+    background-color: $white

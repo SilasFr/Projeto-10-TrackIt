@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-export default function Login() {
-    return (
+import { Link } from "react-router-dom"
+import styled from "styled-components"
+
+export default function SignUp(){
+    return(
         <LoginScreen>
             <div className="login-logo">
                 <svg width="182" height="179" viewBox="0 0 182 179" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,16 +19,17 @@ export default function Login() {
                 <form action="" className="login-form">
                     <input name="email" type="email" placeholder="email" className="login-input-email"/>
                     <input name="password" type="password" placeholder="senha" className="login-input-password"/>
+                    <input name="name" type="text" placeholder="nome" className="login-input-name"/>
+                    <input name="url" type="url" placeholder="foto" className="login-input-url"/>
 
                     <button type="submit" className="login-btn">Entrar</button>
                 </form>
             </div>
 
-            <Link to='/cadastro'>Não tem uma conta? Cadastre-se!</Link>
+            <Link to='/' >Já tem uma conta? Faça login!</Link>
         </LoginScreen>
     )
 }
-
 
 const LoginScreen = styled.div`
 width: 100%;
