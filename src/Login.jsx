@@ -1,6 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Habits from "./Habits";
 export default function Login() {
+    const navigate = useNavigate()
+
+    function handleLogin(e){
+        e.preventDefault()
+        console.log('vai pra habitos')
+        // navigate('/habitos')
+    }
     return (
         <LoginScreen>
             <div className="login-logo">
@@ -15,7 +23,7 @@ export default function Login() {
             </div>
 
             <div className="login">
-                <form action="" className="login-form">
+                <form onSubmit={handleLogin} className="login-form">
                     <input name="email" type="email" placeholder="email" className="login-input-email"/>
                     <input name="password" type="password" placeholder="senha" className="login-input-password"/>
 

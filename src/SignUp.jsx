@@ -1,8 +1,35 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
 import styled from "styled-components"
+import axios from "axios"
 
-export default function SignUp(){
-    return(
+export default function SignUp() {
+    const [newUser, setNewUser] = useState({
+        email: '',
+        name: '',
+        image: '',
+        password: ''
+    })
+
+    function handleInput(e) {
+        setNewUser( { ...newUser, [e.target.name]: e.target.value } )
+    }
+
+    function handleSignUp(e){
+        e.preventDefault()
+        console.log(newUser)
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', {...newUser})
+        promise.then(response=> {
+            alert('Cadastro realizado com sucesso!')
+        })
+
+        promise.catch(error=> {
+            alert(error.response)
+        })
+    }
+
+    console.log('user: ', newUser)
+    return (
         <LoginScreen>
             <div className="login-logo">
                 <svg width="182" height="179" viewBox="0 0 182 179" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,13 +43,41 @@ export default function SignUp(){
             </div>
 
             <div className="login">
-                <form action="" className="login-form">
-                    <input name="email" type="email" placeholder="email" className="login-input-email"/>
-                    <input name="password" type="password" placeholder="senha" className="login-input-password"/>
-                    <input name="name" type="text" placeholder="nome" className="login-input-name"/>
-                    <input name="url" type="url" placeholder="foto" className="login-input-url"/>
+                <form onSubmit={handleSignUp} className="login-form">
+                    <input
+                        type="email"
+                        placeholder="email"
+                        value={newUser.email}
+                        onChange={handleInput}
+                        name="email"
+                        className="login-input-email" />
 
-                    <button type="submit" className="login-btn">Entrar</button>
+                    <input
+                        type="password"
+                        placeholder="senha"
+                        value={newUser.password}
+                        onChange={handleInput}
+                        name="password"
+                        className="login-input-password" />
+
+                    <input
+                        type="text"
+                        placeholder="nome"
+                        value={newUser.name}
+                        onChange={handleInput}
+                        name="name"
+                        className="login-input-name" />
+
+                    <input
+                        type="url"
+                        placeholder="foto"
+                        value={newUser.image}
+                        onChange={handleInput}
+                        name="image"
+                        className="login-input-url" />
+
+
+                    <button type="submit" className="login-btn">Cadastrar</button>
                 </form>
             </div>
 
