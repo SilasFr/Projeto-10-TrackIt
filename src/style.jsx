@@ -48,6 +48,7 @@ const NewHabit = styled.div`
     margin-bottom: 30px;
     border-radius: 5px;
     background-color: #fff;
+    transition: all 100ms ease-out;
     input{
         width: 303px;
         height: 45px;
@@ -68,9 +69,15 @@ const WeekDays = styled.div`
         width: 30px;
         height: 30px;
         border-radius: 5px;
+
+        font-size: 20px;
         color: #DBDBDB;
         background: #FFFFFF;
         border: 1px solid #D4D4D4;
+    }
+    button.selected{
+        background-color:#CFCFCF;
+        color: #fff;
     }
     .id{
         display: none;

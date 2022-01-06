@@ -13,7 +13,7 @@ export default function Habits() {
     const { habits, setHabits } = useContext(HabitsContext)
 
     const [createHabit, setCreatHabit] = useState(false)
-    
+
     const config = {
         headers: {
             "Authorization": `Bearer ${currentUser.token}`
@@ -39,10 +39,12 @@ export default function Habits() {
             <div className="habits">
                 <div className="habits-header">
                     <h2>Meus hábitos</h2>
-                    <button onClick={()=>setCreatHabit(!createHabit)} className="habits-header-btn">+</button>
+                    <button onClick={() => setCreatHabit(!createHabit)} className="habits-header-btn">+</button>
                 </div>
-                { createHabit && <NewHabitBox toggleBox={setCreatHabit} />}
-                <p className="habits-body" >Você não tem nenhum hábito cadastrado ainda.
+                {createHabit && <NewHabitBox toggleBox={setCreatHabit} />}
+
+                <p className="habits-body" >
+                    Você não tem nenhum hábito cadastrado ainda.
                     Adicione um hábito para começar a trackear!
                 </p>
             </div>

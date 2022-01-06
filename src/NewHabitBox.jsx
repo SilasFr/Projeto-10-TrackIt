@@ -1,7 +1,11 @@
+import axios from "axios"
 import { useState } from "react"
+import { useContext } from "react/cjs/react.development"
+import UserContext from "./contexts/UserContext"
 import { HabitOutput, NewHabit, WeekDays } from "./style"
 
-export default function NewHabitBox({toggleBox}) {
+export default function NewHabitBox({ toggleBox }) {
+    const { currentUser, setCurrentUser } = useContext(UserContext)
     const [weekDays, setWeekDays] = useState([
         { day: 'D', isSelected: false, id: 0 },
         { day: 'S', isSelected: false, id: 1 },
@@ -11,27 +15,51 @@ export default function NewHabitBox({toggleBox}) {
         { day: 'S', isSelected: false, id: 5 },
         { day: 'S', isSelected: false, id: 6 },
     ])
+    const [newHabit, setNewHabit] = useState('')
+
+    function handleNewHabit() {
+        const daysId = weekDays.filter(item => item.isSelected === true)
+        const body = {
+            name: newHabit,
+            days: [...daysId.map(item => item.id)]
+        }
+
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${currentUser.token}`
+            }
+        }
+
+        console.log(config)
+        const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config, body)
+        promise.then(response => {
+            console.log('deu certo: ', response.data)
+        })
+
+        promise.catch(error => {
+            console.log('deu erro: ', error.response)
+        })
+    }
+
     function handleSelection(e) {
-        
-        const daySelected = weekDays.filter(item=> {
-            if(item.id == e.target.lastChild.innerHTML){
+        const daySelected = weekDays.filter(item => {
+            if (item.id == e.target.lastChild.innerHTML) {
                 item.isSelected = !item.isSelected
                 return (item)
             }
         })
         setWeekDays([...weekDays])
-
     }
-    console.log('newWeek: ', weekDays )
     return (
         <>
             <NewHabit>
-                <input placeholder="nome do hábito" ></input>
+                <input type='text' value={newHabit} onChange={e => setNewHabit(e.target.value)} placeholder="nome do hábito" ></input>
                 <WeekDays>
                     {weekDays.map(item => {
                         return <button
                             key={item.id}
                             onClick={handleSelection}
+                            className={item.isSelected ? 'selected' : 'default'}
                         >{item.day}
                             <span key={item.id} className="id">
                                 {item.id}
@@ -40,8 +68,8 @@ export default function NewHabitBox({toggleBox}) {
                     })}
                 </WeekDays>
                 <HabitOutput>
-                    <button onClick={()=>toggleBox(false)} className="cancel">Cancelar</button>
-                    <button className="save" >Salvar</button>
+                    <button onClick={() => toggleBox(false)} className="cancel">Cancelar</button>
+                    <button onClick={handleNewHabit} className="save" >Salvar</button>
                 </HabitOutput>
             </NewHabit>
         </>
