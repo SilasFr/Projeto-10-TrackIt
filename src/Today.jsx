@@ -14,6 +14,7 @@ export default function Today({currentUser}) {
         <>
             <Top userImg={currentUser.image}/>
             <h2> Dia de hoje, data de hoje </h2>
+            
         </>
     )
 }

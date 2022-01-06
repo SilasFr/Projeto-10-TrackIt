@@ -67,11 +67,29 @@ body {
   bottom: 0;
   width: 100%;
   height: 70px;
+  font-size: 20px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: #52B6FF;
   background-color: #FFFFFF;
+}
+.menu-center {
+  width: 92px;
+  height: 92px;
+  position: relative;
+}
+.menu-center-item {
+  width: 91px;
+  height: 91px;
+  background-color: #52B6FF;
+  border-radius: 50%;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */
