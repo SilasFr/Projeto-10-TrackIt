@@ -24,4 +24,19 @@ const Trackit = styled.div`
     padding-top: 80px;
 `
 
-export { Trackit, LoaderApp, Loader }
+const LoginScreen = styled.div`
+width: 100%;
+height: 100vh;
+
+padding: 68px 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 32px;
+
+a{
+    color: #52B6FF;
+}
+`
+
+export { Trackit, LoaderApp, LoginScreen }

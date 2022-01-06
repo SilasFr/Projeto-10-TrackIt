@@ -3,10 +3,14 @@ import Menu from "./Menu"
 import Top from "./TopBar"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { useContext } from "react/cjs/react.development"
+import UserContext from "./contexts/UserContext"
+import HabitsContext from "./contexts/HabitsContext"
 
-export default function Habits({ currentUser }) {
-    const [habits, setHabits] = useState([])
-    console.log(currentUser)
+export default function Habits() {
+    const { currentUser, setCurrentUser } = useContext(UserContext)
+    const { habits, setHabits } = useContext(HabitsContext)
+    
     const config = {
         headers: {
             "Authorization": `Bearer ${currentUser.token}`
@@ -22,6 +26,7 @@ export default function Habits({ currentUser }) {
             })
             promise.catch(error => {
                 console.log('erro: ', error.response)
+                alert(error.data)
             })
         }, []
     )

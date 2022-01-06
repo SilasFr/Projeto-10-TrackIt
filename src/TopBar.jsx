@@ -1,4 +1,8 @@
-export default function Top({userImg}) {
+import { useContext } from "react/cjs/react.development"
+import UserContext from "./contexts/UserContext"
+
+export default function Top() {
+    const { currentUser, setCurrentUser } = useContext(UserContext)
     return (
         <div className="top-bar">
             <svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -6,7 +10,7 @@ export default function Top({userImg}) {
             </svg>
 
             <div className="top-bar-img" >
-                <img src={userImg} alt="Profile pic" />
+                <img src={currentUser.image} alt="Profile pic" />
             </div>
         </div>
     )

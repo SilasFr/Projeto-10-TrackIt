@@ -1,22 +1,25 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useContext } from "react/cjs/react.development";
+import {LoginScreen} from './style';
+import UserContext from "./contexts/UserContext";
 
-export default function Login({ setCurrentUser }) {
-    const [user, setUser] = useState({
+export default function Login() {
+    const { currentUser, setCurrentUser } = useContext(UserContext)
+    const [userLogin, setUserLogin] = useState({
         email: '',
         password: ''
     })
     const navigate = useNavigate()
 
     function handleInput(e) {
-        setUser({ ...user, [e.target.name]: e.target.value })
+        setUserLogin({ ...userLogin, [e.target.name]: e.target.value })
     }
 
     function handleLogin(e) {
         e.preventDefault()
-        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', { ...user })
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', { ...userLogin })
         promise.then(response => {
             setCurrentUser(response.data)
             navigate('/habitos')
@@ -41,8 +44,8 @@ export default function Login({ setCurrentUser }) {
 
             <div className="login">
                 <form onSubmit={handleLogin} className="login-form">
-                    <input name="email" value={user.email} type="email" placeholder="email" onChange={handleInput} className="login-input-email" />
-                    <input name="password" value={user.password} type="password" placeholder="senha" onChange={handleInput} className="login-input-password" />
+                    <input name="email" value={userLogin.email} type="email" placeholder="email" onChange={handleInput} className="login-input-email" />
+                    <input name="password" value={userLogin.password} type="password" placeholder="senha" onChange={handleInput} className="login-input-password" />
 
                     <button type="submit" className="login-btn">Entrar</button>
                 </form>
@@ -52,19 +55,3 @@ export default function Login({ setCurrentUser }) {
         </LoginScreen>
     )
 }
-
-
-const LoginScreen = styled.div`
-width: 100%;
-height: 100vh;
-
-padding: 68px 0;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 32px;
-
-a{
-    color: #52B6FF;
-}
-`

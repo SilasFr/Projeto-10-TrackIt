@@ -1,11 +1,14 @@
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
 import Top from "./TopBar"
-import { LoaderApp, LoaderComponent, Trackit } from "./style"
+import { LoaderApp, Trackit } from "./style"
 import Menu from "./Menu"
 import Loader from "react-loader-spinner"
+import UserContext from "./contexts/UserContext"
 
-export default function Today({ currentUser }) {
+export default function Today() {
+
+    const {currentUser, setCurrentUser} = useContext(UserContext)
 
     // useEffect(
     //     () => {
