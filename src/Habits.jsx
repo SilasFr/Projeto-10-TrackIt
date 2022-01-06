@@ -6,10 +6,13 @@ import axios from "axios"
 import { useContext } from "react/cjs/react.development"
 import UserContext from "./contexts/UserContext"
 import HabitsContext from "./contexts/HabitsContext"
+import NewHabitBox from "./NewHabitBox"
 
 export default function Habits() {
     const { currentUser, setCurrentUser } = useContext(UserContext)
     const { habits, setHabits } = useContext(HabitsContext)
+
+    const [createHabit, setCreatHabit] = useState(false)
     
     const config = {
         headers: {
@@ -36,8 +39,9 @@ export default function Habits() {
             <div className="habits">
                 <div className="habits-header">
                     <h2>Meus hábitos</h2>
-                    <button className="habits-header-btn">+</button>
+                    <button onClick={()=>setCreatHabit(!createHabit)} className="habits-header-btn">+</button>
                 </div>
+                { createHabit && <NewHabitBox toggleBox={setCreatHabit} />}
                 <p className="habits-body" >Você não tem nenhum hábito cadastrado ainda.
                     Adicione um hábito para começar a trackear!
                 </p>
