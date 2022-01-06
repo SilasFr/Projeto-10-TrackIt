@@ -1,4 +1,4 @@
-export default function Menu(){
+export default function Menu() {
     return (
         <div className="menu">
             <p className="menu-item">Hábitos</p>

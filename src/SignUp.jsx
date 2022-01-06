@@ -10,6 +10,7 @@ export default function SignUp() {
         image: '',
         password: ''
     })
+    const navigate = useNavigate()
 
     function handleInput(e) {
         setNewUser( { ...newUser, [e.target.name]: e.target.value } )
@@ -21,6 +22,7 @@ export default function SignUp() {
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', {...newUser})
         promise.then(response=> {
             alert('Cadastro realizado com sucesso!')
+            navigate('/')
         })
 
         promise.catch(error=> {

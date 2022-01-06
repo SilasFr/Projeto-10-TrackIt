@@ -1,13 +1,30 @@
+import axios from "axios";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Habits from "./Habits";
-export default function Login() {
+
+export default function Login({ setCurrentUser }) {
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    })
     const navigate = useNavigate()
 
-    function handleLogin(e){
+    function handleInput(e) {
+        setUser({ ...user, [e.target.name]: e.target.value })
+    }
+
+    function handleLogin(e) {
         e.preventDefault()
-        console.log('vai pra habitos')
-        // navigate('/habitos')
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', { ...user })
+        promise.then(response => {
+            setCurrentUser(response.data)
+            navigate('/hoje')
+        })
+
+        promise.catch(erro => {
+            alert('erro:', erro.response)
+        })
     }
     return (
         <LoginScreen>
@@ -24,8 +41,8 @@ export default function Login() {
 
             <div className="login">
                 <form onSubmit={handleLogin} className="login-form">
-                    <input name="email" type="email" placeholder="email" className="login-input-email"/>
-                    <input name="password" type="password" placeholder="senha" className="login-input-password"/>
+                    <input name="email" value={user.email} type="email" placeholder="email" onChange={handleInput} className="login-input-email" />
+                    <input name="password" value={user.password} type="password" placeholder="senha" onChange={handleInput} className="login-input-password" />
 
                     <button type="submit" className="login-btn">Entrar</button>
                 </form>
