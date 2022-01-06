@@ -19,7 +19,7 @@ export default function Login({ setCurrentUser }) {
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', { ...user })
         promise.then(response => {
             setCurrentUser(response.data)
-            navigate('/hoje')
+            navigate('/habitos')
         })
 
         promise.catch(erro => {

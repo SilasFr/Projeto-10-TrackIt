@@ -12,7 +12,7 @@ export default function App() {
             <Routes>
                 <Route path='/' element={<Login setCurrentUser={setCurrentUser} />} />
                 <Route path='/cadastro' element={<SignUp />} />
-                <Route path='/habitos' element={<Habits />} />
+                <Route path='/habitos' element={<Habits currentUser={currentUser}/>} />
                 <Route path='/hoje' element={<Today currentUser={currentUser} />} />
             </Routes>
         </BrowserRouter>
