@@ -7,6 +7,7 @@ import { useContext } from "react/cjs/react.development"
 import UserContext from "./contexts/UserContext"
 import HabitsContext from "./contexts/HabitsContext"
 import NewHabitBox from "./NewHabitBox"
+import HabitsFeed from "./HabitsFeed"
 
 export default function Habits() {
     const { currentUser, setCurrentUser } = useContext(UserContext)
@@ -33,20 +34,28 @@ export default function Habits() {
             })
         }, []
     )
+    console.log('habitos: ', habits)
     return (
         <Trackit>
             <Top />
             <div className="habits">
                 <div className="habits-header">
-                    <h2>Meus hábitos</h2>
+                    <h2>Meus  hábitos</h2>
                     <button onClick={() => setCreatHabit(!createHabit)} className="habits-header-btn">+</button>
                 </div>
                 {createHabit && <NewHabitBox toggleBox={setCreatHabit} />}
 
-                <p className="habits-body" >
-                    Você não tem nenhum hábito cadastrado ainda.
-                    Adicione um hábito para começar a trackear!
-                </p>
+                <div className="habits-body" >
+                    {
+                        habits.length !== 0 ?
+                            <HabitsFeed/> :
+                            <p>
+                                Você não tem nenhum hábito cadastrado ainda.
+                                Adicione um hábito para começar a trackear!
+                            </p>
+                    }
+
+                </div>
             </div>
             <Menu />
         </Trackit>

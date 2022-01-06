@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useContext } from "react/cjs/react.development"
 import UserContext from "./contexts/UserContext"
-import { HabitOutput, NewHabit, WeekDays } from "./style"
+import { HabitOutput, LoaderApp, NewHabit, WeekDays } from "./style"
 
 export default function NewHabitBox({ toggleBox }) {
     const { currentUser, setCurrentUser } = useContext(UserContext)
@@ -16,8 +16,10 @@ export default function NewHabitBox({ toggleBox }) {
         { day: 'S', isSelected: false, id: 6 },
     ])
     const [newHabit, setNewHabit] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     function handleNewHabit() {
+        setIsLoading(true)
         const daysId = weekDays.filter(item => item.isSelected === true)
         const body = {
             name: newHabit,
@@ -31,13 +33,17 @@ export default function NewHabitBox({ toggleBox }) {
         }
 
         console.log(config)
-        const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config, body)
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', body, config)
         promise.then(response => {
             console.log('deu certo: ', response.data)
+            setIsLoading(false)
+            toggleBox(false)
         })
 
         promise.catch(error => {
             console.log('deu erro: ', error.response)
+            setIsLoading(false)
+            toggleBox(false)
         })
     }
 
@@ -53,7 +59,14 @@ export default function NewHabitBox({ toggleBox }) {
     return (
         <>
             <NewHabit>
-                <input type='text' value={newHabit} onChange={e => setNewHabit(e.target.value)} placeholder="nome do hábito" ></input>
+                <input
+                    type='text'
+                    value={newHabit}
+                    onChange={e => setNewHabit(e.target.value)}
+                    placeholder="nome do hábito" 
+                    disabled = {isLoading}
+                    name="habito">
+                </input>
                 <WeekDays>
                     {weekDays.map(item => {
                         return <button
@@ -68,8 +81,17 @@ export default function NewHabitBox({ toggleBox }) {
                     })}
                 </WeekDays>
                 <HabitOutput>
-                    <button onClick={() => toggleBox(false)} className="cancel">Cancelar</button>
-                    <button onClick={handleNewHabit} className="save" >Salvar</button>
+                    <button
+                        onClick={() => toggleBox(false)}
+                        className="cancel">
+                        Cancelar
+                    </button>
+
+                    <button
+                        onClick={handleNewHabit}
+                        className="save" >
+                        {isLoading ? <LoaderApp /> : `Salvar`}
+                    </button>
                 </HabitOutput>
             </NewHabit>
         </>

@@ -56,6 +56,9 @@ const NewHabit = styled.div`
         font-size: 19.976px;
         line-height: 25px;
         border: 1px solid #D4D4D4;
+        :disabled{
+            background-color: #D4D4D4;
+        }
     }
     input::placeholder{
         -webkit-text-fill-color: #DBDBDB;
@@ -97,6 +100,10 @@ const HabitOutput = styled.div`
         line-height: 20px;
         border: none;
         border-radius: 5px;
+
+        display:flex;
+        justify-content: center;
+        align-items: center;
     }
     .cancel{
         background: none;
