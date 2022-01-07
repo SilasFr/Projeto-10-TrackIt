@@ -2,8 +2,10 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import styled from "styled-components"
 import axios from "axios"
+import { LoaderApp } from "./style"
 
 export default function SignUp() {
+    const [isLoading, setIsLoading] = useState(false)
     const [newUser, setNewUser] = useState({
         email: '',
         name: '',
@@ -13,20 +15,25 @@ export default function SignUp() {
     const navigate = useNavigate()
 
     function handleInput(e) {
-        setNewUser( { ...newUser, [e.target.name]: e.target.value } )
+        setNewUser({ ...newUser, [e.target.name]: e.target.value })
     }
 
-    function handleSignUp(e){
+    function handleSignUp(e) {
         e.preventDefault()
+        setIsLoading(true)
         console.log(newUser)
-        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', {...newUser})
-        promise.then(response=> {
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', { ...newUser })
+        promise.then(response => {
             alert('Cadastro realizado com sucesso!')
             navigate('/')
+            setIsLoading(false)
         })
 
-        promise.catch(error=> {
-            alert(error.response)
+        promise.catch(error => {
+            alert(error.response.data.message)
+            console.log(error.response.data)
+            setIsLoading(false)
+
         })
     }
 
@@ -52,6 +59,7 @@ export default function SignUp() {
                         value={newUser.email}
                         onChange={handleInput}
                         name="email"
+                        disabled={isLoading}
                         className="login-input-email" />
 
                     <input
@@ -60,6 +68,7 @@ export default function SignUp() {
                         value={newUser.password}
                         onChange={handleInput}
                         name="password"
+                        disabled={isLoading}
                         className="login-input-password" />
 
                     <input
@@ -68,6 +77,7 @@ export default function SignUp() {
                         value={newUser.name}
                         onChange={handleInput}
                         name="name"
+                        disabled={isLoading}
                         className="login-input-name" />
 
                     <input
@@ -76,10 +86,13 @@ export default function SignUp() {
                         value={newUser.image}
                         onChange={handleInput}
                         name="image"
+                        disabled={isLoading}
                         className="login-input-url" />
 
+                    <button type="submit" className="login-btn">
+                        {isLoading ? <LoaderApp /> : 'Cadastrar'}
 
-                    <button type="submit" className="login-btn">Cadastrar</button>
+                    </button>
                 </form>
             </div>
 
