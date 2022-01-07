@@ -31,13 +31,14 @@ export default function HabitsFeed() {
             })
         )
     }
-
+    console.log(habits)
     return (
         <Feed>
             {habits.map(habit => {
                 return (
                     <Habit key={habit.id}>
-                        <Trash/>
+
+                        <Trash id={habit.id} />
                         <p className="name">{habit.name}</p>
                         <div className="days">
                             {handleHabitDays(habit.days)}
