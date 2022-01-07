@@ -31,7 +31,7 @@ export default function HabitsFeed() {
             })
         )
     }
-    console.log(habits)
+    
     return (
         <Feed>
             {habits.map(habit => {

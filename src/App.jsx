@@ -11,9 +11,10 @@ import History from './History'
 export default function App() {
     const [currentUser, setCurrentUser] = useState()
     const [habits, setHabits] = useState([])
+    const [daylyHabits, setDaylyHabits] = useState()
     return (
         <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-            <HabitsContext.Provider value={{ habits, setHabits }} >
+            <HabitsContext.Provider value={{ habits, setHabits, daylyHabits, setDaylyHabits }} >
                 <BrowserRouter>
                     <Routes>
                         <Route path='/' element={<Login />} />

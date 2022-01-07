@@ -1,38 +1,55 @@
 import axios from "axios"
 import { useEffect, useContext } from "react"
 import Top from "./TopBar"
-import { LoaderApp, Trackit } from "./style"
+import { Trackit } from "./style"
 import Menu from "./Menu"
-import Loader from "react-loader-spinner"
 import UserContext from "./contexts/UserContext"
+import HabitsContext from "./contexts/HabitsContext"
+import HabitsFeed from "./HabitsFeed"
 
 export default function Today() {
 
-    const {currentUser, setCurrentUser} = useContext(UserContext)
+    const { currentUser, setCurrentUser } = useContext(UserContext)
+    const { habits, setHabits } = useContext(HabitsContext)
+    const { daylyHabits, setDaylyHabits } = useContext(HabitsContext)
 
-    // useEffect(
-    //     () => {
-    //         const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today')
-    //     }
-    // )
-    // console.log(currentUser)
+    useEffect(() => {
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${currentUser.token}`
+            }
+        }
+        const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config)
+        promise.then(response => {
+            setHabits(response.data)
+        })
+        promise.catch(error => {
+            alert(error.data)
+        })
+        setDaylyHabits(habits.map(habit=>({...habit, isDone: false})))
+
+    }, [])
+
+    console.log(daylyHabits)
     return (
         <Trackit>
-            {/* <Top userImg={currentUser.image}/> */}
+            <Top userImg={currentUser.image} />
             <div className="today">
                 <div className="today-header">
                     <h2>Dia de hoje, datda de hoje</h2>
-                    {/* <button className="today-header-btn">
-                        <LoaderApp />
-
-                    </button> */}
                     <p>
                         Porcentagem de progresso.
                     </p>
                 </div>
-                <p className="today-body" >Você não tem nenhum hábito cadastrado ainda.
-                    Adicione um hábito para começar a trackear!
-                </p>
+                {
+                    habits.length !== 0 ?
+                        <HabitsFeed />
+                        :
+                        <p className="today-body" >Você não tem nenhum hábito cadastrado ainda.
+                            Adicione um hábito para começar a trackear!
+                        </p>
+
+                }
             </div>
             <Menu></Menu>
         </Trackit>

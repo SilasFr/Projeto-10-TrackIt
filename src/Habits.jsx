@@ -15,14 +15,15 @@ export default function Habits() {
 
     const [createHabit, setCreatHabit] = useState(false)
 
-    const config = {
-        headers: {
-            "Authorization": `Bearer ${currentUser.token}`
-        }
-    }
+    
 
     useEffect(
         () => {
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${currentUser.token}`
+                }
+            }
             const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config)
             promise.then(response => {
                 setHabits(response.data)
