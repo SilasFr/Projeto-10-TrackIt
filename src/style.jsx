@@ -17,10 +17,12 @@ class LoaderApp extends React.Component {
 }
 
 const Trackit = styled.div`
+    min-height: 100%;
     background-color: #F2F2F2;
     height: 100vh;
-    padding: 15px;
-    padding-top: 80px;
+    padding: 80px 15px;
+    padding-bottom: 40px;
+    margin-bottom: 80px;
 `
 
 const LoginScreen = styled.div`
@@ -115,11 +117,54 @@ const HabitOutput = styled.div`
     }
 `
 
+const Feed = styled.div`
+    display: flex;
+    flex-direction: column; 
+    gap: 5px;
+`
+
 const Habit = styled.div`
     width: 340px;
     height: 91px;
+    padding: 14px;
+    border-radius: 5px;
     background-color: #fff;
+    position: relative;
+
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    p{
+        font-size: 19.976px;
+        line-height: 25px;
+        color: #666666;
+    }
+    .days{
+        display: flex;
+        gap: 2px;
+        button{
+            width: 30px;
+            height: 30px;
+            border: 1px solid #D5D5D5;
+            border-radius: 5px;
+
+            color:#DBDBDB;
+            background-color: #fff;
+        }
+        button.selected{            
+
+            color: #fff;
+            background-color: #CFCFCF;
+        }
+    }
 
 `
 
-export { Trackit, LoaderApp, LoginScreen, NewHabit, WeekDays, HabitOutput }
+const TrashCan = styled.div`
+    position: absolute;
+    top: 11px;
+    right: 10px;
+    /* border: 1px solid blue; */
+`
+
+export { Trackit, LoaderApp, LoginScreen, NewHabit, WeekDays, Habit, HabitOutput, Feed, TrashCan }

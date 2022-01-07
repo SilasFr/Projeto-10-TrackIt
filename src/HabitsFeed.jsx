@@ -1,28 +1,27 @@
 import { useContext } from "react"
-import { useState } from "react/cjs/react.development"
 import HabitsContext from "./contexts/HabitsContext"
+import { Feed, Habit } from "./style"
+import Trash from "./Trash"
 
 export default function HabitsFeed() {
     const { habits, setHabits } = useContext(HabitsContext)
-    const [weekDays, setWeekDays] = useState([
-        { day: 'D', isSelected: false, id: 0 },
-        { day: 'S', isSelected: false, id: 1 },
-        { day: 'T', isSelected: false, id: 2 },
-        { day: 'Q', isSelected: false, id: 3 },
-        { day: 'Q', isSelected: false, id: 4 },
-        { day: 'S', isSelected: false, id: 5 },
-        { day: 'S', isSelected: false, id: 6 },
-    ])
+    const weekDays = [
+        { day: 'D', id: 0 },
+        { day: 'S', id: 1 },
+        { day: 'T', id: 2 },
+        { day: 'Q', id: 3 },
+        { day: 'Q', id: 4 },
+        { day: 'S', id: 5 },
+        { day: 'S', id: 6 },
+    ]
 
     function handleHabitDays(targetHabit) {
         return (
             weekDays.map(weekday => {
-                const contain = targetHabit.filter(item=> weekday.id === item )
-                console.log('contain : ', contain)
-                console.log('weekday: ', weekday.id)
+                const contain = targetHabit.filter(item => weekday.id === item)
                 return (
                     <button
-                        className={ contain[0] === weekday.id? 'selected' : '' }
+                        className={contain[0] === weekday.id ? 'selected' : ''}
                         key={weekday.id}
                         disabled
                     >
@@ -34,22 +33,18 @@ export default function HabitsFeed() {
     }
 
     return (
-        <>
+        <Feed>
             {habits.map(habit => {
                 return (
-                    <div key={habit.id} className="habits-body-habit">
-                        <h2 className="habits-body-habit-name">{habit.name}</h2>
-                        { handleHabitDays(habit.days) }
-                    </div>
+                    <Habit key={habit.id}>
+                        <Trash/>
+                        <p className="name">{habit.name}</p>
+                        <div className="days">
+                            {handleHabitDays(habit.days)}
+                        </div>
+                    </Habit>
                 )
             })}
-        </>
+        </Feed>
     )
 }
-
-
-// const teste = habit.days.map(day => {
-//     return (
-//         <button key={day} > {day} </button>
-//     )
-// })
