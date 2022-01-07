@@ -34,7 +34,7 @@ export default function Habits() {
             })
         }, []
     )
-    console.log('habitos: ', habits)
+    
     return (
         <Trackit>
             <Top />

@@ -17,6 +17,11 @@ input:disabled {
   background-color: #D4D4D4 !important;
 }
 
+button.selected {
+  background-color: #CFCFCF;
+  color: #fff;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;

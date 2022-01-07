@@ -115,4 +115,11 @@ const HabitOutput = styled.div`
     }
 `
 
+const Habit = styled.div`
+    width: 340px;
+    height: 91px;
+    background-color: #fff;
+
+`
+
 export { Trackit, LoaderApp, LoginScreen, NewHabit, WeekDays, HabitOutput }

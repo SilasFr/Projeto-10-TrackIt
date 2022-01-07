@@ -34,17 +34,14 @@ export default function NewHabitBox({ toggleBox }) {
             }
         }
 
-        console.log(config)
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', body, config)
         promise.then(response => {
-            console.log('deu certo: ', response.data)
             setHabits([...habits, response.data])
             setIsLoading(false)
             toggleBox(false)
         })
 
         promise.catch(error => {
-            console.log('deu erro: ', error.response)
             setIsLoading(false)
             alert('Erro: ', error.response.data)
         })
