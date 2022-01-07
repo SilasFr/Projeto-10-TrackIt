@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import Loader from 'react-loader-spinner'
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css'
 import React from 'react';
 
 class LoaderApp extends React.Component {

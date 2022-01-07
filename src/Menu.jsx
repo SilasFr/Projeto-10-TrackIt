@@ -1,3 +1,4 @@
+import { CircularProgressbar } from "react-circular-progressbar";
 import { Link } from "react-router-dom";
 
 export default function Menu() {
@@ -6,10 +7,37 @@ export default function Menu() {
             <Link to={'/habitos'} >
                 <p className="menu-item">Hábitos</p>
             </Link>
-            
+
             <div className="menu-center">
                 <Link to={'/hoje'} >
-                    <div className="menu-center-item">Hoje</div>
+                    <div className="menu-center-item">
+                        <CircularProgressbar
+                            value={60}
+                            text={'Hoje'}
+                            background={true}
+                            styles={{
+                                root: {},
+                                path: {
+                                    stroke: `#fff`,
+                                    strokeLinecap: 'round',
+                                    transition: 'stroke-dashoffset 0.5s ease 0s',
+                                    transformOrigin: 'center center',
+                                },
+                                trail: {
+                                    stroke: 'transparent',
+                                    strokeLinecap: 'butt',
+                                    transform: 'rotate(0.25turn)',
+                                    transformOrigin: 'center center',
+                                },
+                                text: {
+                                    fill: '#fff',
+                                    fontSize: '20px',
+                                },
+                                background: {
+                                    fill: '#52B6FF',
+                                },
+                            }} />
+                    </div>
                 </Link>
             </div>
 

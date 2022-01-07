@@ -5,6 +5,11 @@
   text-decoration: none;
 }
 
+a::visited {
+  color: red;
+  text-decoration: none;
+}
+
 body {
   width: 100%;
   max-width: 375px;
@@ -99,6 +104,7 @@ button.selected {
   background-color: #52B6FF;
   border-radius: 50%;
   color: #FFFFFF;
+  padding: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
