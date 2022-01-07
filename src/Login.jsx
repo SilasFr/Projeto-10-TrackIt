@@ -2,10 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react/cjs/react.development";
-import { LoginScreen } from './style';
+import { LoaderApp, LoginScreen } from './style';
 import UserContext from "./contexts/UserContext";
 
 export default function Login() {
+    const [isLoading, setIsLoading] = useState(false)
     const { currentUser, setCurrentUser } = useContext(UserContext)
     const [userLogin, setUserLogin] = useState({
         email: '',
@@ -19,14 +20,17 @@ export default function Login() {
 
     function handleLogin(e) {
         e.preventDefault()
+        setIsLoading(true)
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', { ...userLogin })
         promise.then(response => {
             setCurrentUser(response.data)
             navigate('/habitos')
+            setIsLoading(false)
         })
 
         promise.catch(erro => {
             alert('erro:', erro.response)
+            setIsLoading(false)
         })
     }
     return (
@@ -44,10 +48,26 @@ export default function Login() {
 
             <div className="login">
                 <form onSubmit={handleLogin} className="login-form">
-                    <input name="email" value={userLogin.email} type="email" placeholder="email" onChange={handleInput} className="login-input-email" />
-                    <input name="password" value={userLogin.password} type="password" placeholder="senha" onChange={handleInput} className="login-input-password" />
+                    <input
+                        name="email"
+                        value={userLogin.email}
+                        type="email"
+                        placeholder="email"
+                        onChange={handleInput}
+                        disabled={isLoading}
+                        className="login-input-email" />
+                    <input
+                        name="password"
+                        value={userLogin.password}
+                        type="password"
+                        placeholder="senha"
+                        onChange={handleInput}
+                        disabled={isLoading}
+                        className="login-input-password" />
 
-                    <button type="submit" className="login-btn">Entrar</button>
+                    <button disabled={isLoading} type="submit" className="login-btn">
+                        {isLoading? <LoaderApp/> : 'Entrar' }
+                    </button>
                 </form>
             </div>
 

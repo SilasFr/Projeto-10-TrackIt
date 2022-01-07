@@ -1,11 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
 import { useContext } from "react/cjs/react.development"
+import HabitsContext from "./contexts/HabitsContext"
 import UserContext from "./contexts/UserContext"
 import { HabitOutput, LoaderApp, NewHabit, WeekDays } from "./style"
 
 export default function NewHabitBox({ toggleBox }) {
     const { currentUser, setCurrentUser } = useContext(UserContext)
+    const {habits, setHabits} = useContext(HabitsContext)
     const [weekDays, setWeekDays] = useState([
         { day: 'D', isSelected: false, id: 0 },
         { day: 'S', isSelected: false, id: 1 },
@@ -36,6 +38,7 @@ export default function NewHabitBox({ toggleBox }) {
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', body, config)
         promise.then(response => {
             console.log('deu certo: ', response.data)
+            setHabits([...habits, response.data])
             setIsLoading(false)
             toggleBox(false)
         })
@@ -43,7 +46,7 @@ export default function NewHabitBox({ toggleBox }) {
         promise.catch(error => {
             console.log('deu erro: ', error.response)
             setIsLoading(false)
-            toggleBox(false)
+            alert('Erro: ', error.response.data)
         })
     }
 
