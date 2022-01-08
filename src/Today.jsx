@@ -5,13 +5,11 @@ import { Trackit } from "./style"
 import Menu from "./Menu"
 import UserContext from "./contexts/UserContext"
 import HabitsContext from "./contexts/HabitsContext"
-import HabitsFeed from "./HabitsFeed"
 import TodaysFeed from "./TodaysFeed"
 
 export default function Today() {
 
     const { currentUser, setCurrentUser } = useContext(UserContext)
-    const { habits, setHabits } = useContext(HabitsContext)
     const { daylyHabits, setDaylyHabits } = useContext(HabitsContext)
 
     useEffect(() => {
@@ -28,7 +26,7 @@ export default function Today() {
             alert(error.data)
         })
     }, [])
-    
+
     return (
         <Trackit>
             <Top userImg={currentUser.image} />

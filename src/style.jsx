@@ -202,6 +202,10 @@ const DaylyHabit = styled.div`
         border: none;
         border-radius: 5px;
     }
+
+    .habit-checkbox.selected{
+        background: #8FC549;
+    }
     
 `
 

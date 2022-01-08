@@ -18,6 +18,10 @@ body {
   font-family: "Lexend Deca";
 }
 
+.hidden {
+  display: none;
+}
+
 input:disabled {
   background-color: #D4D4D4 !important;
 }
