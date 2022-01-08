@@ -7,7 +7,6 @@ import { DaylyHabit, Feed } from "./style"
 export default function TodaysFeed() {
     const { daylyHabits, setDaylyHabits } = useContext(HabitsContext)
     const { currentUser, setCurrentUser } = useContext(UserContext)
-    console.log(daylyHabits)
 
     function handleIsDone(e) {
         let id
@@ -17,7 +16,6 @@ export default function TodaysFeed() {
         } 
         else id = (e.target.parentNode.nextSibling.innerText)
 
-        console.log('id: ', id)
         const body = {}
         const config = {
             headers: {
@@ -26,15 +24,17 @@ export default function TodaysFeed() {
         }
         const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, body, config)
         promise.then(response => {
-            console.log('response: ', response.data)
+            const promise2 = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', config)
+            promise2.then(response=>{
+                setDaylyHabits(response.data)
+            })
         })
 
         promise.catch(error => {
-            console.log('erro: ', error.response)
             alert(error.response.data.message)
         })
     }
-    console.log('daylyHH', daylyHabits)
+    
     return (
         <Feed>
             {

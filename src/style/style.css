@@ -116,12 +116,12 @@ button.selected {
   bottom: 20px;
 }
 
-.habits, .today {
+.habits {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.habits-header, .today-header {
+.habits-header {
   width: 100%;
   height: 34px;
   margin: 20px 0;
@@ -129,12 +129,12 @@ button.selected {
   justify-content: space-between;
   align-items: center;
 }
-.habits-header h2, .today-header h2 {
+.habits-header h2 {
   color: #126BA5;
   font-size: 23px;
   font-weight: 400;
 }
-.habits-header-btn, .today-header-btn {
+.habits-header-btn {
   width: 40px;
   height: 35px;
   background: #52B6FF;
@@ -143,10 +143,33 @@ button.selected {
   color: #FFFFFF;
   font-size: 26px;
 }
-.habits-body, .today-body {
+.habits-body {
   color: #666666;
   font-size: 18px;
   line-height: 22px;
+}
+
+.today {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #666666;
+  font-size: 18px;
+  line-height: 22px;
+}
+.today-header {
+  width: 100%;
+  height: 34px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+}
+.today-header h2 {
+  color: #126BA5;
+  font-size: 23px;
+  font-weight: 400;
 }
 
 /*# sourceMappingURL=style.css.map */

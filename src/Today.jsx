@@ -6,8 +6,19 @@ import Menu from "./Menu"
 import UserContext from "./contexts/UserContext"
 import HabitsContext from "./contexts/HabitsContext"
 import TodaysFeed from "./TodaysFeed"
+import dayjs from "dayjs"
+import updateLocale from 'dayjs/plugin/updateLocale'
 
 export default function Today() {
+    dayjs.extend(updateLocale)
+    dayjs.updateLocale('en', {
+        weekdays: [
+            "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
+        ]
+    })
+    let dayOfTheWeek = dayjs().format('dddd')
+    let dateTime = dayjs().format('DD/MM')
+
 
     const { currentUser, setCurrentUser } = useContext(UserContext)
     const { daylyHabits, setDaylyHabits } = useContext(HabitsContext)
@@ -32,7 +43,7 @@ export default function Today() {
             <Top userImg={currentUser.image} />
             <div className="today">
                 <div className="today-header">
-                    <h2>Dia de hoje, datda de hoje</h2>
+                    <h2>{` ${dayOfTheWeek}, ${dateTime}`}</h2>
                     <p>
                         Porcentagem de progresso.
                     </p>
@@ -41,10 +52,10 @@ export default function Today() {
                     daylyHabits.length !== 0 ?
                         <TodaysFeed />
                         :
-                        <p className="today-body" >Você não tem nenhum hábito cadastrado ainda.
+                        <p className="today-body" >
+                            Você não tem nenhum hábito cadastrado ainda.
                             Adicione um hábito para começar a trackear!
                         </p>
-
                 }
             </div>
             <Menu></Menu>
