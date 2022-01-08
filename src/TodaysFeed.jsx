@@ -7,34 +7,58 @@ import { DaylyHabit, Feed } from "./style"
 export default function TodaysFeed() {
     const { daylyHabits, setDaylyHabits } = useContext(HabitsContext)
     const { currentUser, setCurrentUser } = useContext(UserContext)
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${currentUser.token}`
+        }
+    }
 
     function handleIsDone(e) {
         let id
-
-        if (e.target.lastChild) {
+        if (e.target.tagName == 'BUTTON') {
             id = (e.target.lastChild.innerText)
-        } 
-        else id = (e.target.parentNode.nextSibling.innerText)
-
-        const body = {}
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${currentUser.token}`
-            }
         }
-        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, body, config)
-        promise.then(response => {
-            const promise2 = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', config)
-            promise2.then(response=>{
-                setDaylyHabits(response.data)
-            })
-        })
-
-        promise.catch(error => {
-            alert(error.response.data.message)
-        })
+        else if (e.target.tagName == 'path') {
+            id = (e.target.parentNode.nextSibling.innerText)
+        }
+        else if (e.target.tagName == 'svg') {
+            id = (e.target.nextSibling.innerText)
+        }
+        verify(id)
     }
-    
+
+    function verify(id) {
+        const daylyHabit = daylyHabits.filter(item => item.id == id)
+        if (daylyHabit.done) {
+            unmarkHabit(daylyHabit)
+        } else markHabit(daylyHabit)
+    }
+
+    function markHabit(habit) {
+        const body = {}
+        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`, body, config)
+        promise.then(response => reRenderHabits())
+
+        promise.catch(error => alert(error.response.data.message))
+    }
+
+    function unmarkHabit(habit) {
+        const body = {}
+        // const config = {
+        //     headers: {
+        //         'Authorization': `Bearer ${currentUser.token}`
+        //     }
+        // }
+        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`, body, config)
+        promise.then(response => reRenderHabits())
+    }
+
+    function reRenderHabits() {
+        const promise2 = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', config)
+        promise2.then(response => setDaylyHabits(response.data))
+        promise2.catch(error => alert(error.response.data.message) )
+    }
+
     return (
         <Feed>
             {

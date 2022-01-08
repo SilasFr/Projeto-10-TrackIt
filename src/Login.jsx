@@ -28,8 +28,9 @@ export default function Login() {
             setIsLoading(false)
         })
 
-        promise.catch(erro => {
-            alert('erro:', erro.response)
+        promise.catch(error => {
+            console.log(error)
+            alert( error)
             setIsLoading(false)
         })
     }
