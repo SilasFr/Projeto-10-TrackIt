@@ -6,6 +6,7 @@ import Menu from "./Menu"
 import UserContext from "./contexts/UserContext"
 import HabitsContext from "./contexts/HabitsContext"
 import HabitsFeed from "./HabitsFeed"
+import TodaysFeed from "./TodaysFeed"
 
 export default function Today() {
 
@@ -19,18 +20,15 @@ export default function Today() {
                 "Authorization": `Bearer ${currentUser.token}`
             }
         }
-        const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config)
+        const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', config)
         promise.then(response => {
-            setHabits(response.data)
+            setDaylyHabits(response.data)
         })
         promise.catch(error => {
             alert(error.data)
         })
-        setDaylyHabits(habits.map(habit=>({...habit, isDone: false})))
-
     }, [])
-
-    console.log(daylyHabits)
+    
     return (
         <Trackit>
             <Top userImg={currentUser.image} />
@@ -42,8 +40,8 @@ export default function Today() {
                     </p>
                 </div>
                 {
-                    habits.length !== 0 ?
-                        <HabitsFeed />
+                    daylyHabits.length !== 0 ?
+                        <TodaysFeed />
                         :
                         <p className="today-body" >Você não tem nenhum hábito cadastrado ainda.
                             Adicione um hábito para começar a trackear!

@@ -18,15 +18,6 @@ class LoaderApp extends React.Component {
     }
 }
 
-const Trackit = styled.div`
-    min-height: 100%;
-    background-color: #F2F2F2;
-    height: 100vh;
-    padding: 80px 15px;
-    padding-bottom: 40px;
-    margin-bottom: 80px;
-`
-
 const LoginScreen = styled.div`
     width: 100%;
     height: 100vh;
@@ -40,6 +31,15 @@ const LoginScreen = styled.div`
     a{
         color: #52B6FF;
     }
+`
+
+const Trackit = styled.div`
+    min-height: 100%;
+    background-color: #F2F2F2;
+    height: 100vh;
+    padding: 80px 15px;
+    padding-bottom: 40px;
+    margin-bottom: 80px;
 `
 
 const NewHabit = styled.div`
@@ -162,6 +162,49 @@ const Habit = styled.div`
 
 `
 
+const DaylyHabit = styled.div`
+    width: 340px;
+    height: 94px;
+    padding: 14px;
+    border-radius: 5px;
+    background-color: #fff;
+    position: relative;
+
+    display:flex;
+    flex-direction: row;
+    gap: 35px;
+    .habit-info{
+        width: 208px;
+
+        display: flex;
+        flex-direction: column;
+        span{
+            font-size: 12.976px;
+            line-height: 16px;
+            color: #666666;
+        }
+        
+        p{
+            height: 25px;
+            width: 100%;
+            font-size: 19.976px;
+            line-height: 25px;
+            color: #666666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+    }
+    }
+    .habit-checkbox{
+        width: 69px;
+        height: 69px;
+        background-color: #EBEBEB;
+        border: none;
+        border-radius: 5px;
+    }
+    
+`
+
 const TrashCan = styled.div`
     position: absolute;
     top: 11px;
@@ -169,4 +212,19 @@ const TrashCan = styled.div`
     /* border: 1px solid blue; */
 `
 
-export { Trackit, LoaderApp, LoginScreen, NewHabit, WeekDays, Habit, HabitOutput, Feed, TrashCan }
+// const CheckSign =
+
+
+export {
+    Trackit,
+    LoaderApp,
+    LoginScreen,
+    NewHabit,
+    WeekDays,
+    Habit,
+    HabitOutput,
+    Feed,
+    TrashCan,
+    DaylyHabit,
+    // CheckSign
+}
