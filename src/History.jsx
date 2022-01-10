@@ -15,7 +15,7 @@ export default function History() {
                         Em breve você poderá ver
                         o histórico dos seus hábitos aqui!
                     </p>
-                    <MyCalendar />
+                    {/* <MyCalendar /> */}
                 </div>
             </div>
             <Menu />
