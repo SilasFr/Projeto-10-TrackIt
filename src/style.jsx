@@ -36,10 +36,10 @@ const LoginScreen = styled.div`
 const Trackit = styled.div`
     min-height: 100%;
     background-color: #F2F2F2;
-    height: 100vh;
-    padding: 80px 15px;
-    padding-bottom: 40px;
-    margin-bottom: 80px;
+    min-height: 100vh;
+    height: 100%;
+    padding: 80px 17px;
+    padding-bottom: 100px;
 `
 
 const NewHabit = styled.div`

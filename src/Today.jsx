@@ -51,7 +51,7 @@ export default function Today() {
             <div className="today">
                 <div className="today-header">
                     <h2>{` ${dayOfTheWeek}, ${dateTime}`}</h2>
-                    <p>
+                    <p className={percentage && 'highlight'}>
                         { percentage == 0? 'Nenhum hábito concluído ainda': `${percentage.toFixed(2)*100 }% dos hábitos concluídos` }
                     </p>
                 </div>
