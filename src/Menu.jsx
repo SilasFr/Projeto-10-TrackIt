@@ -1,7 +1,11 @@
 import { CircularProgressbar } from "react-circular-progressbar";
 import { Link } from "react-router-dom";
+import { useContext } from "react/cjs/react.development";
+import HabitsContext from "./contexts/HabitsContext";
 
 export default function Menu() {
+    const {percentage, setPercentage} = useContext(HabitsContext)
+
     return (
         <div className="menu">
             <Link to={'/habitos'} >

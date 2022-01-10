@@ -30,7 +30,7 @@ export default function Login() {
 
         promise.catch(error => {
             console.log(error)
-            alert( error)
+            alert(error)
             setIsLoading(false)
         })
     }

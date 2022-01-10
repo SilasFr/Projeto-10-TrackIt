@@ -28,37 +28,46 @@ export default function TodaysFeed() {
     }
 
     function verify(id) {
-        const daylyHabit = daylyHabits.filter(item => item.id == id)
+        const [daylyHabit] = daylyHabits.filter(item => item.id == id)
         if (daylyHabit.done) {
+            console.log('feito')
             unmarkHabit(daylyHabit)
         } else markHabit(daylyHabit)
     }
 
     function markHabit(habit) {
         const body = {}
-        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`, body, config)
+        const id = habit.id
+        console.log('habit: ', habit)
+        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, body, config)
         promise.then(response => reRenderHabits())
 
-        promise.catch(error => alert(error.response.data.message))
+        promise.catch(error => {
+            console.log(error.response)
+            alert(error.response.data.message)
+        })
+        reRenderHabits()
     }
 
     function unmarkHabit(habit) {
         const body = {}
-        // const config = {
-        //     headers: {
-        //         'Authorization': `Bearer ${currentUser.token}`
-        //     }
-        // }
-        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`, body, config)
+        const id = habit.id
+        console.log(habit)
+
+        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, body, config)
         promise.then(response => reRenderHabits())
+        promise.catch(error => {
+            alert(error.response.data.message)
+            reRenderHabits()
+        })
     }
 
     function reRenderHabits() {
         const promise2 = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', config)
         promise2.then(response => setDaylyHabits(response.data))
-        promise2.catch(error => alert(error.response.data.message) )
+        promise2.catch(error => alert(error.response.data.message))
     }
-
+    
     return (
         <Feed>
             {

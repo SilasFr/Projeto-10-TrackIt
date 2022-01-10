@@ -12,9 +12,10 @@ export default function App() {
     const [currentUser, setCurrentUser] = useState()
     const [habits, setHabits] = useState([])
     const [daylyHabits, setDaylyHabits] = useState([])
+    const [percentage, setPercentage] = useState()
     return (
         <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-            <HabitsContext.Provider value={{ habits, setHabits, daylyHabits, setDaylyHabits }} >
+            <HabitsContext.Provider value={{ habits, setHabits, daylyHabits, setDaylyHabits, percentage, setPercentage }} >
                 <BrowserRouter>
                     <Routes>
                         <Route path='/' element={<Login />} />
