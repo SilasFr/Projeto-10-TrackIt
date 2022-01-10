@@ -1,5 +1,6 @@
 import Menu from "./Menu";
-import { Trackit } from "./style";
+import React from "react";
+import { MyCalendar, Trackit } from "./style";
 import Top from "./TopBar";
 
 export default function History() {
@@ -14,6 +15,7 @@ export default function History() {
                         Em breve você poderá ver
                         o histórico dos seus hábitos aqui!
                     </p>
+                    {/* <MyCalendar/> */}
                 </div>
             </div>
             <Menu />

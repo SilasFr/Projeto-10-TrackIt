@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import Loader from 'react-loader-spinner'
-import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css'
-import React from 'react';
+import React, {useState} from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'
 
 class LoaderApp extends React.Component {
     render() {
@@ -17,6 +18,20 @@ class LoaderApp extends React.Component {
         );
     }
 }
+
+function MyCalendar() {
+    const [value, onChange] = useState(new Date());
+  
+    return (
+      <div>
+        <Calendar
+          onChange={onChange}
+          value={value}
+          calendarType='US'
+        />
+      </div>
+    );
+  }
 
 const LoginScreen = styled.div`
     width: 100%;
@@ -213,10 +228,7 @@ const TrashCan = styled.div`
     position: absolute;
     top: 11px;
     right: 10px;
-    /* border: 1px solid blue; */
 `
-
-// const CheckSign =
 
 
 export {
@@ -230,5 +242,5 @@ export {
     Feed,
     TrashCan,
     DaylyHabit,
-    // CheckSign
+    MyCalendar
 }

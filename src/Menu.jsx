@@ -1,5 +1,6 @@
 import { CircularProgressbar } from "react-circular-progressbar";
 import { Link } from "react-router-dom";
+import React from "react";
 import { useContext } from "react/cjs/react.development";
 import HabitsContext from "./contexts/HabitsContext";
 

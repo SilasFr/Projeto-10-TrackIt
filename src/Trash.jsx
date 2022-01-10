@@ -1,4 +1,5 @@
 import axios from "axios";
+import React from "react";
 import { useContext, useEffect } from "react/cjs/react.development";
 import HabitsContext from "./contexts/HabitsContext";
 import UserContext from "./contexts/UserContext";
@@ -17,14 +18,11 @@ export default function Trash({ id }) {
             })
 
         promise.then(response=>{
-            console.log('response: ', response)
             const newHabits = habits.filter(item=> item.id !== id)
-            console.log(newHabits)
             setHabits(newHabits)
         })
 
         promise.catch(error=>{
-            console.log(error.response)
             alert('Erro: ', error.response.data)
         })
     }

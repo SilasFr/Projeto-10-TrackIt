@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, React } from "react"
 import HabitsContext from "./contexts/HabitsContext"
 import { Feed, Habit } from "./style"
 import Trash from "./Trash"
