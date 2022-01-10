@@ -1,17 +1,20 @@
 import axios from "axios"
-import { useContext } from "react/cjs/react.development"
+import { useContext, useEffect } from "react/cjs/react.development"
 import HabitsContext from "./contexts/HabitsContext"
 import UserContext from "./contexts/UserContext"
 import { DaylyHabit, Feed } from "./style"
 
 export default function TodaysFeed() {
-    const { daylyHabits, setDaylyHabits } = useContext(HabitsContext)
     const { currentUser, setCurrentUser } = useContext(UserContext)
+    const { daylyHabits, setDaylyHabits } = useContext(HabitsContext)
+    const { percentage, setPercentage } = useContext(HabitsContext)
+
     const config = {
         headers: {
             'Authorization': `Bearer ${currentUser.token}`
         }
     }
+    useEffect( handlePercentage,[daylyHabits] )
 
     function handleIsDone(e) {
         let id
@@ -30,7 +33,6 @@ export default function TodaysFeed() {
     function verify(id) {
         const [daylyHabit] = daylyHabits.filter(item => item.id == id)
         if (daylyHabit.done) {
-            console.log('feito')
             unmarkHabit(daylyHabit)
         } else markHabit(daylyHabit)
     }
@@ -38,28 +40,33 @@ export default function TodaysFeed() {
     function markHabit(habit) {
         const body = {}
         const id = habit.id
-        console.log('habit: ', habit)
         const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, body, config)
-        promise.then(response => reRenderHabits())
+        promise.then(response => {
+            reRenderHabits()})
 
         promise.catch(error => {
-            console.log(error.response)
             alert(error.response.data.message)
+            reRenderHabits()
         })
-        reRenderHabits()
     }
 
     function unmarkHabit(habit) {
         const body = {}
         const id = habit.id
-        console.log(habit)
 
         const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, body, config)
-        promise.then(response => reRenderHabits())
+        promise.then(response => {
+            reRenderHabits()})
         promise.catch(error => {
             alert(error.response.data.message)
             reRenderHabits()
         })
+    }
+
+    function handlePercentage(){
+        const totalHabits = daylyHabits.length
+        const result = (daylyHabits.filter(item=> item.done === true)).length / totalHabits
+        setPercentage(result)
     }
 
     function reRenderHabits() {
@@ -67,7 +74,6 @@ export default function TodaysFeed() {
         promise2.then(response => setDaylyHabits(response.data))
         promise2.catch(error => alert(error.response.data.message))
     }
-    
     return (
         <Feed>
             {

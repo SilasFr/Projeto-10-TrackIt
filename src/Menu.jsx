@@ -5,7 +5,6 @@ import HabitsContext from "./contexts/HabitsContext";
 
 export default function Menu() {
     const {percentage, setPercentage} = useContext(HabitsContext)
-
     return (
         <div className="menu">
             <Link to={'/habitos'} >
@@ -16,7 +15,7 @@ export default function Menu() {
                 <Link to={'/hoje'} >
                     <div className="menu-center-item">
                         <CircularProgressbar
-                            value={60}
+                            value={percentage*100}
                             text={'Hoje'}
                             background={true}
                             styles={{

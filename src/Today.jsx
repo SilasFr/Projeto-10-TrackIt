@@ -13,7 +13,13 @@ export default function Today() {
     dayjs.extend(updateLocale)
     dayjs.updateLocale('en', {
         weekdays: [
-            "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"
+            "Domingo",
+            "Segunda",
+            "Terça",
+            "Quarta",
+            "Quinta",
+            "Sexta",
+            "Sábado"
         ]
     })
     let dayOfTheWeek = dayjs().format('dddd')
@@ -22,6 +28,7 @@ export default function Today() {
 
     const { currentUser, setCurrentUser } = useContext(UserContext)
     const { daylyHabits, setDaylyHabits } = useContext(HabitsContext)
+    const { percentage, setPercentage } = useContext(HabitsContext)
 
     useEffect(() => {
         const config = {
@@ -45,7 +52,7 @@ export default function Today() {
                 <div className="today-header">
                     <h2>{` ${dayOfTheWeek}, ${dateTime}`}</h2>
                     <p>
-                        Porcentagem de progresso.
+                        { percentage == 0? 'Nenhum hábito concluído ainda': `${percentage.toFixed(2)*100 }% dos hábitos concluídos` }
                     </p>
                 </div>
                 {
