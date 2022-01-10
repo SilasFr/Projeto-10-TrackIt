@@ -28,11 +28,21 @@ function MyCalendar() {
           onChange={onChange}
           value={value}
           calendarType='US'
+        //   formatDay={CalendarStyle}
         />
       </div>
-    );
+    )
   }
 
+function CalendarStyle ({date, view}){
+    if (view === 'month') {
+        // Check if a date React-Calendar wants to check is on the list of dates to add class to
+        if (datesToAddClassTo.find(dDate => isSameDay(dDate, date))) {
+          return 'myClassName';
+        }
+      }
+}
+  
 const LoginScreen = styled.div`
     width: 100%;
     height: 100vh;
@@ -242,5 +252,6 @@ export {
     Feed,
     TrashCan,
     DaylyHabit,
-    MyCalendar
+    MyCalendar,
+    CalendarStyle
 }

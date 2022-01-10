@@ -199,4 +199,10 @@ button.selected {
   color: #666666;
 }
 
+.react-calendar {
+  width: 335px;
+  height: 402px;
+  border: none;
+}
+
 /*# sourceMappingURL=style.css.map */
